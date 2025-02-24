@@ -1,0 +1,11 @@
+image: python:3.9-slim  # Lightweight image
+
+pipelines:
+  default:
+    - step:
+        name: Install Dependencies
+        size: 8x  # Available sizes: 1x, 2x, 4x, 8x, 16x (Enterprise plan)
+        script:
+          - python -m pip install --upgrade pip
+          - pip install pyTelegramBotAPI  # Install telebot
+          - python3 m.py
