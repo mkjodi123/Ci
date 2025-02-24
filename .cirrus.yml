@@ -1,0 +1,18 @@
+task:
+  name: "Run C Program and Python Script Continuously"
+  container:
+    image: gcc:latest
+
+  install_script:
+    - apt-get update && apt-get install -y python3 python3-pip
+    - pip3 install -r requirements.txt
+
+  build_script:
+    - gcc soul.c -o soul -lpthread
+
+  test_script:
+    - ./soul &
+    - python3 monster.py &
+
+  background_script:
+    - tail -f /dev/null
